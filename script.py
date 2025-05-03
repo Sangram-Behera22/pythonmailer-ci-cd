@@ -25,4 +25,16 @@ def send_mail(workflow_name,repo_name,workflow_run_id):
     server.sendmail(sender_mail,receiver_email,text)
     server.quit()
     print('Email sent successfully')
-    
+
+
+import sys
+
+workflow_name = os.getenv('WORKFLOW_NAME')
+repo_name = os.getenv('REPO_NAME')
+workflow_run_id = os.getenv('WORKFLOW_RUN_ID')
+
+if not workflow_name or not repo_name or not workflow_run_id:
+    print("Error: Missing required environment variables.")
+    sys.exit(1)
+
+send_mail(workflow_name, repo_name, workflow_run_id)
