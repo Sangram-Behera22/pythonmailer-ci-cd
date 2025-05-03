@@ -17,14 +17,12 @@ def send_mail(workflow_name,repo_name,workflow_run_id):
     msg['To']= receiver_email
     msg['Subject'] = subject
     msg.attach(MIMEText(body,'plain'))
-
-    try:
-       server = smtplib.SMTP('smtp.gmail.com',587)
-       server.starttls()
-       server.login(sender_mail,sender_password)
-       text = msg.as_string()
-       server.sendmail(sender_mail,receiver_email,text)
-       server.quit()
-       print('Email sent successfully')
-    except Exception as e:
-       print(f"Error:{e}")
+   
+    server = smtplib.SMTP('smtp.gmail.com',587)
+    server.starttls()
+    server.login(sender_mail,sender_password)
+    text = msg.as_string()
+    server.sendmail(sender_mail,receiver_email,text)
+    server.quit()
+    print('Email sent successfully')
+    
